@@ -14,11 +14,15 @@ Terminal::Terminal(const std::string &s)
 void
 Terminal::init_terminal() const
 {
-    cout << "cglab version: 2.0" << endl;
-    cout << "Welcome to use this Lab Platform for Computer Graphics!" << endl;
-    cout << "If you want to learn more about this platform, please read README in my github repository:"
-         << "https://github.com/shinkungoo/cglab" << endl;
-    cout << "-------------------------------------------------------" << endl;
+    cout << "/*****************************************************************************" << endl;
+    cout << "*  Lab Platform for Computer Graphics                                        *" << endl;
+    cout << "*  Copyright (C) 2022 Junhao Shen                                            *" << endl;
+    cout << "*                                                                            *" << endl;
+    cout << "*  version  2.0.0                                                            *" << endl;
+    cout << "*  Welcome to use Lab Platform for Computer Graphics!                        *" << endl;
+    cout << "*  If you want to learn more about this platform, please visit my github     *" << endl;
+    cout << "*  repository: https://github.com/shinkungoo/cglab                           *" << endl;
+    cout << "/*****************************************************************************" << endl;
     cout << "\033[?251";
     cout << scope << state << "<< " << flush;
     for(int i = 0; i < scope.size() + state.size() + strlen("<< "); i ++){

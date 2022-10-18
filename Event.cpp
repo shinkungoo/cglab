@@ -1,5 +1,8 @@
 #include "Event.h"
 
+/**
+ * @
+ */
 void displayFunc()
 {
 
@@ -33,9 +36,20 @@ void reshapeFunc(int w, int h)
 Event::Event()
 {
     display = displayFunc;
+    displayFuncPtr = displayFunc;
+
     keyboard = keyboardFunc;
+    keyboardFuncPtr = keyboardFunc;
+
     specialKeyboard = specialKeyboardFunc;
+    specialKeyboardFuncPtr = specialKeyboardFunc;
+
     mouse = mouseFunc;
+    mouseFuncPtr = mouseFunc;
+
     mouseMove = mouseMoveFunc;
+    mouseMoveFuncPtr = mouseMoveFunc;
+
     reshape = reshapeFunc;
+    reshapeFuncPtr = reshapeFunc;
 }

@@ -1,5 +1,19 @@
-/// File name: import.h
-/// Usage: Contain all necessary header files and using what we will use.
+/*****************************************************************************
+*  Lab Platform for Computer Graphics                                        *
+*  Copyright (C) 2022 Junhao Shen                                            *
+*                                                                            *
+*  @file     import.h                                                        *
+*  @brief    header files inclusion                                          *
+*  This file contains all STANDARD header files which will be used in this   *
+*  structure. So if you want to add header files, DO NOT include customized  *
+*  header files.                                                             *
+*                                                                            *
+*  @author   Junhao Shen                                                     *
+*  @email    shinkungoo133500@gmail.com                                      *
+*  @version  2.0.0                                                           *
+*  @date     2022-10-18                                                      *
+*  @license  GNU General Public License (GPL)                                *
+*****************************************************************************/
 #ifndef CGLAB_IMPORT_H
 #define CGLAB_IMPORT_H
 /*
@@ -28,7 +42,7 @@ using std::flush;
  * STL container
  * <vector>: contain a sequence of points
  * <deque>: buffer for command lines, points and shapes.
- * <map>:
+ * <map>: manage all command lines
  * <string_view>: store the scope and state in terminal.
  * <string>: store the command line in terminal.
  */
@@ -42,18 +56,26 @@ using std::deque;
 using std::map;
 using std::string_view;
 using std::string;
-// other STL
+/*
+ * STL utility
+ * <algorithm>: to complete some algorithms used in drawing
+ * <functional>: encapsulate some functions
+ * <limits>: provide max and min of number
+ */
 #include <algorithm>
 #include <functional>
 #include <limits>
 using std::sort;
 using std::function;
 using std::bind;
-
-// C header files
+/*
+ * C Standard Library
+ * <cctype>: decide the types
+ * <cstring>: using some functions to manipulate C string
+ * <cmath>: use math functions
+ */
 #include <cctype>
 #include <cstring>
 #include <cmath>
-
 
 #endif //CGLAB_IMPORT_H
