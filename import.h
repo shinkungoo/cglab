@@ -26,11 +26,11 @@ using std::flush;
 #include <OpenGL/OpenGL.h>
 /*
  * STL container
- * <vector>:
- * <deque>:
+ * <vector>: contain a sequence of points
+ * <deque>: buffer for command lines, points and shapes.
  * <map>:
- * <string_view>:
- * <string>:
+ * <string_view>: store the scope and state in terminal.
+ * <string>: store the command line in terminal.
  */
 #include <vector>
 #include <deque>
@@ -39,14 +39,20 @@ using std::flush;
 #include <string>
 using std::vector;
 using std::deque;
-// TODO complete using
+using std::map;
+using std::string_view;
+using std::string;
 // other STL
 #include <algorithm>
 #include <functional>
 #include <limits>
+using std::sort;
+using std::function;
+using std::bind;
 
 // C header files
 #include <cctype>
+#include <cstring>
 #include <cmath>
 
 
