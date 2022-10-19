@@ -1,7 +1,21 @@
+/*****************************************************************************
+*  Lab Platform for Computer Graphics                                        *
+*  Copyright (C) 2022 Junhao Shen                                            *
+*                                                                            *
+*  @file     Event.h                                                         *
+*  @brief    Event class specification                                       *
+*                                                                            *
+*  @author   Junhao Shen                                                     *
+*  @email    shinkungoo133500@gmail.com                                      *
+*  @version  2.0.0                                                           *
+*  @date     2022-10-19                                                      *
+*  @license  GNU General Public License (GPL)                                *
+*****************************************************************************/
 #ifndef CGLAB_EVENT_H
 #define CGLAB_EVENT_H
 #include "import.h"
 
+// TODO complete comments of this class
 class Event {
 public:
     function<void()> display;

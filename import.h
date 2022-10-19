@@ -20,10 +20,12 @@
  * IO header files
  * <iostream>: print instructions to terminal
  * <filesystem>: (future) read graphics and save graphics files
+ * <sstring> read string to buffer
  * <unistd.h>: support unicode character, by which we can hide the cursor in terminal
  */
 #include <iostream>
 #include <filesystem>
+#include <sstream>
 // only in the unix-like systems have this header file
 #if __linux__ or __APPLE__
     #include <unistd.h>
@@ -31,6 +33,7 @@
 using std::cout;
 using std::endl;
 using std::flush;
+using std::istringstream;
 /*
  * OpenGL
  * <GLUT/glut.h>: An implementation of OpenGL

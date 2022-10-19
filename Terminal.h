@@ -2,8 +2,8 @@
 *  Lab Platform for Computer Graphics                                        *
 *  Copyright (C) 2022 Junhao Shen                                            *
 *                                                                            *
-*  @file     terminal.cpp                                                    *
-*  @brief    terminal class specification                                    *
+*  @file     Terminal.h                                                      *
+*  @brief    Terminal class specification                                    *
 *                                                                            *
 *  @author   Junhao Shen                                                     *
 *  @email    shinkungoo133500@gmail.com                                      *
@@ -24,21 +24,20 @@
 
 class Terminal {
 private:
-    bool isModify;
-    string_view scope;
-    string_view state;
+    int stateID;
+    string scope;
+    string state;
     string line;
 public:
     explicit Terminal(const string & s = "canvas");
-    void init_terminal() const;
+    void initTerminal() const;
     void input(char c);
     void backspace() noexcept;
     void clear() noexcept;
-    void switch_scope(const string & sv);
-    void switch_state(const string & sv);
+    void switchScope(const string & sv);
+    void switchState(const string & sv);
     void operator()(bool isBackspace = true) const;
-    void operator()(const string & s) const;
-    // TODO complete split function to separate line
+    void operator()(const string & s, bool isLast = false) const;
     deque<string_view> split() const;
 };
 

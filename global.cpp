@@ -17,9 +17,7 @@
 #include "Event.h"
 #include "Shape.h"
 #include "Terminal.h"
-/*
- * Use unnamed namespace to store all global variables
- */
+
 
 // size of window
 int width = 1080;
@@ -29,19 +27,13 @@ int mainWindow = 0;
 // state of modify
 int isModify = false;
 // buffer
-
-
+deque<deque<string_view>> lineBuffer;
+map<string_view, Shape*> shapeBuffer;
 // Terminal
 Terminal terminal;
 // Event
 Event event;
-
-enum state {
-    is_line,
-    is_line_dda,
-    is_line_bres,
-    is_circle,
-    is_ellipse,
-    is_poly,
-    is_polyfill
-};
+// stateID-state map
+map<unsigned int, string_view> stateMap;
+// command-state map
+map<string_view, unsigned int> commandMap;

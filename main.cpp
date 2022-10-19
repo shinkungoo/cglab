@@ -85,7 +85,7 @@ int main(int argc, char ** argv)
      * 2. set mode read
      * 3. print init info
      */
-    terminal.init_terminal();
+    terminal.initTerminal();
     /*
      * Register event. DO NOT MODIFY THIS PART! You should modify the implementation of these function(in Event.cpp)
      */
