@@ -14,8 +14,8 @@
 *  @date     2022-10-18                                                      *
 *  @license  GNU General Public License (GPL)                                *
 *****************************************************************************/
-#ifndef CGLAB_IMPORT_H
-#define CGLAB_IMPORT_H
+#ifndef CGLAB_STANDARDLIBRARY_H
+#define CGLAB_STANDARDLIBRARY_H
 /*
  * IO header files
  * <iostream>: print instructions to terminal
@@ -30,6 +30,8 @@
 #if __linux__ or __APPLE__
     #include <unistd.h>
 #endif
+using std::cin;
+using std::clearerr;
 using std::cout;
 using std::endl;
 using std::flush;
@@ -46,30 +48,28 @@ using std::istringstream;
  * <vector>: contain a sequence of points
  * <deque>: buffer for command lines, points and shapes.
  * <map>: manage all command lines
- * <string_view>: store the scope and state in terminal.
+ *
  * <string>: store the command line in terminal.
  */
 #include <vector>
 #include <deque>
 #include <map>
-#include <string_view>
 #include <string>
 using std::vector;
 using std::deque;
 using std::map;
-using std::string_view;
 using std::string;
+using std::stoi;
+using std::stof;
+using std::to_string;
 /*
  * STL utility
  * <algorithm>: to complete some algorithms used in drawing
- * <functional>: encapsulate some functions
  * <limits>: provide max and min of number
  */
 #include <algorithm>
-#include <functional>
 #include <limits>
 using std::sort;
-using std::function;
 using std::bind;
 /*
  * C Standard Library
@@ -81,4 +81,4 @@ using std::bind;
 #include <cstring>
 #include <cmath>
 
-#endif //CGLAB_IMPORT_H
+#endif //CGLAB_STANDARDLIBRARY_H

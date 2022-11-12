@@ -31,8 +31,7 @@
 *  1. More flexible.                                                         *
 *  All shapes are based on the base class Shape. You can follow the API book *
 *  to customize your shape class inherited from the base class. When you     *
-*  create new shape in canvas, the object can be named default or you can    *
-*  name it use command "name [string of name]"                               *
+*  create new shape in canvas, the object can be named default.              *                            *
 *  2. Better display of terminal                                             *
 *  You can see what you type and modify them in real time now!               *
 *  3. command "inspect"                                                      *
@@ -41,66 +40,63 @@
 *  by this class.                                                            *
 *****************************************************************************/
 
+#include "standardLibrary.h"
+#include "Global.h"
+#include "events.h"
+#include "utilities.h"
 
-#include "import.h"
-#include "Event.h"
-#include "Terminal.h"
-
-extern Terminal terminal;
-extern Event event;
-extern int height, width;
-extern int mainWindow;
 
 int main(int argc, char ** argv)
 {
     /*
      * Initialization of window. You can modify the display mode, size of window, position of generation and caption.
      */
+    Global& global = Global::getInstance();
     glutInit(&argc, argv);
     // set display mode of window
     glutInitDisplayMode(GLUT_SINGLE|GLUT_RGBA|GLUT_DEPTH|GLUT_STENCIL);
     // set the size of window
-    glutInitWindowSize(width, height);
+    glutInitWindowSize(global.width, global.height);
     // set the position of window's generation
     glutInitWindowPosition(500, 500);
     // set the caption of window
-    mainWindow = glutCreateWindow("Lab Platform for Computer Graphics");
+    global.mainWindow = glutCreateWindow("Lab Platform for Computer Graphics");
     /*
      * Initialization of OpenGL. Before you understand the projection, DO NOT MODIFY ANY LINES in this part
      */
     // set 2d-projection, now the left-up corner is (0,0)
     // set the drawing area
-    glViewport(0, 0, width, height);
+    glViewport(0, 0, global.width, global.height);
     // set projection
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(0.0,(GLdouble) width , 0.0,(GLdouble) height , -1.0, 1.0);
+    glOrtho(0.0,(GLdouble) global.width, 0.0,(GLdouble) global.height, -1.0, 1.0);
     // enable the logic-index
     glEnable(GL_COLOR_LOGIC_OP);
     // ... you can enable other functions with glEnable()
     // ...
     /*
      * Initialization of terminal
-     * 1. set scope as "canvas"
-     * 2. set mode read
+     * 1. init command set
+     * 2. init mouse behavior set
      * 3. print init info
      */
-    terminal.initTerminal();
+    initialization();
     /*
      * Register event. DO NOT MODIFY THIS PART! You should modify the implementation of these function(in Event.cpp)
      */
     // register display function
-    glutDisplayFunc(event.displayFuncPtr);
+    glutDisplayFunc(displayFunc);
     // register keyboard function
-    glutKeyboardFunc(event.keyboardFuncPtr);
+    glutKeyboardFunc(keyboardFunc);
     // register special keyboard(like insert, next page and so on) function
-    glutSpecialFunc(event.specialKeyboardFuncPtr);
+    glutSpecialFunc(specialKeyboardFunc);
     // register mouse function
-    glutMouseFunc(event.mouseFuncPtr);
+    glutMouseFunc(mouseFunc);
     // register the motion of mouse function
-    glutMotionFunc(event.mouseMoveFuncPtr);
+    glutMotionFunc(mouseMoveFunc);
     // register the reshape function to render the window again once the size of window is changed
-    glutReshapeFunc(event.reshapeFuncPtr);
+    glutReshapeFunc(reshapeFunc);
 
     glutMainLoop();
 
