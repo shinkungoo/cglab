@@ -15,6 +15,7 @@
 
 #include "utilities.h"
 #include "Commands.h"
+#include "Behavior.h"
 
 
 void
@@ -32,6 +33,7 @@ initialization(){
     cout << "INFO >> Press 's' when cursor in the main window to switch to terminal mode" << endl;
 
     CommandSet::getInstance().init();
+    Behavior::getInstance().init();
 }
 
 deque<string>
@@ -57,4 +59,18 @@ void setPixel(GLint xCoord, GLint yCoord, GLint zCoord, RGBA color, float size)
 
     glEnd();
     glFlush();
+}
+
+double distance(const Point & a, const Point & b)
+{
+    return sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+}
+
+double slope(const Point & a, const Point & b)
+{
+    if(a.x == b.x){
+        return 0;
+    }else{
+        return static_cast<double>(a.y - b.y) / static_cast<double>(a.x - b.x);
+    }
 }

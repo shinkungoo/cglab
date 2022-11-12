@@ -46,16 +46,18 @@ using std::istringstream;
 /*
  * STL container
  * <vector>: contain a sequence of points
+ * <list> : As ET table.
  * <deque>: buffer for command lines, points and shapes.
  * <map>: manage all command lines
- *
  * <string>: store the command line in terminal.
  */
 #include <vector>
+#include <list>
 #include <deque>
 #include <map>
 #include <string>
 using std::vector;
+using std::list;
 using std::deque;
 using std::map;
 using std::string;

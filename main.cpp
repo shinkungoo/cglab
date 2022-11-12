@@ -70,7 +70,7 @@ int main(int argc, char ** argv)
     // set projection
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(0.0,(GLdouble) global.width, 0.0,(GLdouble) global.height, -1.0, 1.0);
+    glOrtho(0.0,(GLdouble) global.width, (GLdouble) global.height, 0.0, -1.0, 1.0);
     // enable the logic-index
     glEnable(GL_COLOR_LOGIC_OP);
     // ... you can enable other functions with glEnable()

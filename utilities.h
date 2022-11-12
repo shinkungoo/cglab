@@ -23,5 +23,7 @@ deque<string> split(const string & command);
 void setPixel(GLint xCoord, GLint yCoord, GLint zCoord,
               RGBA color = Global::getInstance().color,
               float size = Global::getInstance().size);
+double distance(const Point & a, const Point & b);
+double slope(const Point & a, const Point & b);
 
 #endif //CGLAB_UTILITIES_H

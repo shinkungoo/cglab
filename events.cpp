@@ -17,6 +17,7 @@
 #include "events.h"
 #include "utilities.h"
 #include "Buffer.h"
+#include "Behavior.h"
 #include "Commands.h"
 #include "Shape.h"
 #include "Global.h"
@@ -46,7 +47,7 @@ void keyboardFunc(unsigned char key, int x, int y)
         cin.clear();
         clearerr(stdin);
         fflush(stdin);
-        while(getline(cin, tempCommand) && !global.isWindow){
+        while(!global.isWindow && getline(cin, tempCommand)){
             auto tempSplitCommand = split(tempCommand);
             buffer.commandBuffer.push_back(tempSplitCommand);
             if(commandSet[buffer.commandBuffer.back()[0]]){
@@ -75,10 +76,13 @@ void mouseFunc(int button, int state, int x, int y)
 {
     auto& global = Global::getInstance();
     auto& buffer = Buffer::getInstance();
+    auto& behaviorSet = Behavior::getInstance().behaviorSet;
     if(state == GLUT_DOWN){
         if(button == GLUT_LEFT_BUTTON){
-            if(global.condition == "point"){
-                ;
+            if(!global.isModify){
+                cout << "ERROR >> Can not draw anything in read mode" << endl;
+            }else if(behaviorSet[global.condition]){
+                behaviorSet[global.condition](x, y);
             }
         }else if(button == GLUT_RIGHT_BUTTON){
             cout << "INFO >> Current Pos:(" << x << ", " << y << ")" << endl;
@@ -94,23 +98,27 @@ void mouseMoveFunc(int xMouse, int yMouse)
 // TODO fix the bug: shape disappearance
 void reshapeFunc(int w, int h)
 {
+    auto & global = Global::getInstance();
+    glViewport(0,0,w,h);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(0.0,(GLdouble)w, 0.0,(GLdouble)h, -1.0, 1.0);
+
+    if(w <= h){
+        glOrtho(0.0,(GLdouble)global.width,
+                (GLdouble)global.width * h / w, 0.0,
+                -1.0, 1.0);
+    }else{
+        glOrtho(0.0,(GLdouble)global.width * w / h,
+                (GLdouble)global.width, 0.0,
+                -1.0, 1.0);
+    }
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-
-    // reset viewport
-    glViewport(0,0,w,h);
-    glClearColor(1.0, 1.0, 1.0, 1.0);
-    glClear(GL_COLOR_BUFFER_BIT);
-    glFlush();
-
     // reset the size of window
-    Global::getInstance().width = w;
-    Global::getInstance().height = h;
+    global.width = w;
+    global.height = h;
 }
 
 

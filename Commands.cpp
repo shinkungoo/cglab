@@ -3,7 +3,7 @@
 *  Copyright (C) 2022 Junhao Shen                                            *
 *                                                                            *
 *  @file     Commands.cpp                                                    *
-*  @brief    all buffers                                                     *
+*  @brief    all Commands                                                    *
 *  This file declares all functions which commands will invoke. If you want  *
 *  to add your own function, your parameter list of prototypes must be the   *
 *  same with the given ones.                                                 *
@@ -44,21 +44,20 @@ point(const deque<string> & command) {
     auto& global = Global::getInstance();
     auto& buffer = Buffer::getInstance();
     if(command.size() == 1){
-        cout << "============window mode============" << endl;
-        cout << "INFO >> You can draw point by mouse" << endl;
-        cout << "INFO >> Press 's' when cursor in the main window to switch to terminal mode" << endl;
         global.isWindow = true;
         global.condition = "point";
     }else if(command.size() == 4){
-        if(!global.isConditional){
+        if(!global.isModify){
+            cout << "ERROR >> Can not draw anything in read mode" << endl;
+        }else if(global.isConditional){
+            // imitate mouse click
+            mouseFunc(GLUT_DOWN, GLUT_LEFT_BUTTON, stoi(command[1]), stoi(command[2]));
+        }else{
             auto p = new Point(stoi(command[1]), stoi(command[2]), stoi(command[3]));
             p->draw(global.color);
             buffer.shapeBuffer[p->name()] = p;
             cout << "INFO >> Successfully draw a point. ";
             p->info();
-        }else{
-            // imitate mouse click
-            mouseFunc(GLUT_DOWN, GLUT_LEFT_BUTTON, stoi(command[1]), stoi(command[2]));
         }
     }else{
         cout << "ERROR >> No matching parameter lists. The format of \"point\" is\n"
@@ -68,7 +67,32 @@ point(const deque<string> & command) {
 
 void
 line(const deque<string> & command) {
-    ;
+    auto& global = Global::getInstance();
+    auto& buffer = Buffer::getInstance();
+    if(command.size() == 2){
+        global.isWindow = true;
+        global.isConditional = true;
+        global.condition = "line";
+    }else if(command.size() == 8){
+        if(command[1] == "-d"){
+            ;
+        }else if(command[1] == "-b"){
+            ;
+        }else if(command[1] == "-g"){
+            auto l = new Line(Point(stoi(command[2]), stoi(command[3]), stoi(command[4])),
+                              Point(stoi(command[5]), stoi(command[6]), stoi(command[7])));
+            l->draw(global.color);
+            buffer.shapeBuffer[l->name()] = l;
+            cout << "INFO >> Successfully draw a line(glut algorithm). ";
+            l->info();
+        }else{
+            cout << "ERROR >> No matching parameter lists. The format of \"line\" is\n"
+                 << "line <-d/-b/-g> [x1] [y1] [z1] [x2] [y2] [z2]" << endl;
+        }
+    }else{
+        cout << "ERROR >> No matching parameter lists. The format of \"line\" is\n"
+             << "line <-d/-b/-g> [x1] [y1] [z1] [x2] [y2] [z2]" << endl;
+    }
 }
 
 void
@@ -122,12 +146,13 @@ reset(const deque<string> & command) {
 void
 read(const deque<string> & command) {
     Global::getInstance().isModify = false;
+    Global::getInstance().condition = "null";
     cout << "INFO >> In read mode" << endl;
 }
 
 void
 mod(const deque<string> & command) {
-    Global::getInstance().isModify = false;
+    Global::getInstance().isModify = true;
     cout << "INFO >> In modify mode" << endl;
 }
 
